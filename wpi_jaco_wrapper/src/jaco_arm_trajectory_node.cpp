@@ -900,8 +900,11 @@ void JacoArmTrajectoryController::cartesianCmdCallback(const wpi_jaco_msgs::Cart
   //populate arm command
   if (msg.armCommand)
   {
-    if (msg.position)
+    if (msg.position){
       jacoPoint.Position.Type = CARTESIAN_POSITION;
+      jacoPoint.Limitations.speedParameter1 = 0.02;
+	  jacoPoint.Limitations.speedParameter2 = 0.4;
+    }
     else
       jacoPoint.Position.Type = CARTESIAN_VELOCITY;
     jacoPoint.Position.CartesianPosition.X = msg.arm.linear.x;
